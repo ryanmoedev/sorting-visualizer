@@ -1,6 +1,6 @@
 # Sorting Algorithm Visualizer in 2022 React
 
-Live Demo at Github Pages: https://ryanmoedev.github.io/pathfinder-visualizer/
+Live Demo at Github Pages: https://ryanmoedev.github.io/sorting-visualizer/
 
 ## Available Scripts
 
