@@ -3,6 +3,7 @@ import BarRange from "./BarRange";
 import "./SortingVisualizer.css";
 import { getMergeSortAnimations } from "../SortingAlgorithms/MergeSort";
 import { getQuickSortAnimations } from "../SortingAlgorithms/QuickSort";
+import { getBubbleSortAnimations } from "../SortingAlgorithms/BubbleSort";
 // import useWindowDimensions from "./WindowDimensions";
 
 // Change this value for the speed of the animations.
@@ -114,6 +115,32 @@ const SortingVisualizer = () => {
     }
   };
 
+  const bubbleSort = () => {
+    const animations = getBubbleSortAnimations(array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName("array-bar");
+      if (animations[i].type === "focus") {
+        const barIdx = animations[i].index;
+        const prevIdx = barIdx === 0 ? array.length - 1 : barIdx - 1;
+        const barStyle = arrayBars[barIdx].style;
+        const prevStyle = arrayBars[prevIdx].style;
+        setTimeout(() => {
+          prevStyle.backgroundColor = INITIAL_COLOR;
+          barStyle.backgroundColor = FOCUS_COLOR;
+        }, i * ANIMATION_SPEED_MS);
+      } else if (animations[i].type === "swap") {
+        const [barOneIdx, barTwoIdx] = animations[i].index;
+        const [newHeightOne, newHeightTwo] = animations[i].newHeight;
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        setTimeout(() => {
+          barOneStyle.height = `${newHeightOne}px`;
+          barTwoStyle.height = `${newHeightTwo}px`;
+        }, i * ANIMATION_SPEED_MS);
+      }
+    }
+  };
+
   //STATES
   const [numArrayBars, setNumArrayBars] = useState(INIT_NUMBER_OF_ARRAY_BARS);
   const [array, setArray] = useState(resetArray());
@@ -149,6 +176,14 @@ const SortingVisualizer = () => {
               }}
             >
               Quick Sort
+            </button>
+            <button
+              className="algo-btn"
+              onClick={() => {
+                bubbleSort();
+              }}
+            >
+              Bubble Sort
             </button>
           </div>
         </div>

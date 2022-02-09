@@ -20,7 +20,7 @@ const BarRange = ({ defaultBars, handleNewBars }) => {
         type="range"
         id="num-bars"
         name="num-bars"
-        min="5"
+        min="10"
         max="400"
         onChange={handleBarChange}
         onMouseUp={handleBarChange}
