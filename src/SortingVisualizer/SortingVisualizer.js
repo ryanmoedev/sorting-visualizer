@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BarRange from "./BarRange";
 import "./SortingVisualizer.css";
 import { getMergeSortAnimations } from "../SortingAlgorithms/MergeSort";
 import { getQuickSortAnimations } from "../SortingAlgorithms/QuickSort";
@@ -8,7 +9,7 @@ import { getQuickSortAnimations } from "../SortingAlgorithms/QuickSort";
 const ANIMATION_SPEED_MS = 2;
 
 // Change this value for the number of bars (value) in the array.
-const NUMBER_OF_ARRAY_BARS = 400;
+const INIT_NUMBER_OF_ARRAY_BARS = 400;
 
 // This is the main color of the array bars.
 const INITIAL_COLOR = "#06d6a0";
@@ -27,7 +28,7 @@ const SortingVisualizer = () => {
 
   const resetArray = () => {
     const arr = [];
-    for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
+    for (let i = 0; i < numArrayBars; i++) {
       arr.push(randomIntFromInterval(5, 900));
     }
     return arr;
@@ -39,8 +40,14 @@ const SortingVisualizer = () => {
     const arrayBars = document.getElementsByClassName("array-bar");
     for (const bar of arrayBars) {
       bar.style.backgroundColor = INITIAL_COLOR;
+      bar.style.width = `${1200 / numArrayBars - 1}px`;
     }
     setArray(newArr);
+  };
+
+  const handleNewBars = (numBars) => {
+    setNumArrayBars(numBars);
+    handleGenerateNewArray();
   };
 
   const mergeSort = () => {
@@ -72,7 +79,6 @@ const SortingVisualizer = () => {
     let prevPivotIdx = 0;
     let prevLRIdx = 0;
     for (let i = 0; i < animations.length; i++) {
-      //   console.log(animations[i]);
       const arrayBars = document.getElementsByClassName("array-bar");
 
       if (animations[i].type === "swap") {
@@ -109,12 +115,16 @@ const SortingVisualizer = () => {
   };
 
   //STATES
+  const [numArrayBars, setNumArrayBars] = useState(INIT_NUMBER_OF_ARRAY_BARS);
   const [array, setArray] = useState(resetArray());
   //   const { winWidth, winHeight } = useWindowDimensions(); //unused for now.
   return (
     <>
       <div className="app-ctr">
         <div className="control-banner">
+          <div id="bar-slider">
+            <BarRange defaultBars={INIT_NUMBER_OF_ARRAY_BARS} handleNewBars={handleNewBars} />
+          </div>
           <div className="button-ctr">
             <button
               id="generate-array-btn"

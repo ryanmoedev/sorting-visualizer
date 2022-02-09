@@ -4,9 +4,7 @@ export function getQuickSortAnimations(array) {
   return animations;
 }
 function quickSort(array, animations) {
-  console.log("ORIGINAL ARRAY:", array);
   quickSortHelper(array, 0, array.length - 1, animations);
-  console.log("SORTED ARRAY:", array);
   return array;
 }
 

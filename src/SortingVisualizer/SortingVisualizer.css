@@ -17,6 +17,8 @@ body {
 .control-banner {
   min-height: 100px;
   background-color: #073b4c;
+  display: flex;
+  justify-content: center;
 }
 .array-ctr {
   width: 100%;
@@ -73,4 +75,18 @@ body {
 
 #generate-array-btn:hover {
   background-color: #118ab2;
+}
+
+#bar-slider {
+  margin: auto 1.5rem;
+}
+
+#bar-slider input {
+  margin: 0.5rem;
+}
+
+#bar-slider label {
+  color: #eeeeee;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
 }
